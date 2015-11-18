@@ -6,8 +6,8 @@ before_install:
 script:
 - docker run --rm -it -v $(pwd):/var/texlive harshjv/texlive-2015 pdflatex main.tex
 - ls -all
-- chown -R `whoami` main.pdf
-- chmod -R u+wx main.pdf
+- sudo chown travis:travis  main.pdf
+- sudo chmod u+wx main.pdf
 - ls -all
 deploy:
   provider: releases
