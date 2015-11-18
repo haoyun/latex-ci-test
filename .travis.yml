@@ -5,7 +5,7 @@ before_install:
 - docker pull harshjv/texlive-2015
 script:
 - docker run --rm -it -v $(pwd):/var/texlive harshjv/texlive-2015 pdflatex main.tex
-- ls
+- ls -all
 deploy:
   provider: releases
   api_key:
