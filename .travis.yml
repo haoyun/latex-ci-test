@@ -1,15 +1,19 @@
 sudo: required
-
 services:
-    - docker
-
+- docker
 before_install:
-    - docker pull harshjv/texlive-2015
-#     - docker build -t texlive docker
-    
-
+- docker pull harshjv/texlive-2015
 script:
-    - docker run --rm harshjv/texlive-2015 ls -lah /opt/texbin/
-    - docker run --rm -it -v $(pwd):/var/texlive harshjv/texlive-2015 pdflatex main.tex
-    - docker run --rm -it -v $(pwd):/var/texlive harshjv/texlive-2015 ls -lah /opt/texbin/
+- docker run --rm harshjv/texlive-2015 ls -lah /opt/texbin/
+- docker run --rm -it -v $(pwd):/var/texlive harshjv/texlive-2015 pdflatex main.tex
+- docker run --rm -it -v $(pwd):/var/texlive harshjv/texlive-2015 ls -lah /opt/texbin/
+deploy:
+  provider: releases
+  api_key:
+    secure: JjY6BzgNivF8Us3J1/W4xzxTiEbx0pcWIidTr6tQ/baRYTIEHFkt6MAV0uAHAHOfnNHNHY+5kJm481fNZA+Zp5+qsgpngkbteKgWBF4Nua8Kkgc0QZkIPZE5wX2LXxa4vLuvGSe2n4xh9hJ2st3p0TgudlB0H0T3XEgQeeQJkBl8ZaDK4cWskf4MUpnzdkaJQ0cLkY+s4MHg+GKsEjCtxQWs/Zz10fo1Y449dgRrRcaceqBdH++dMzG7Mwh64LhcDJgtTpJORLOJciD9Rdp7ms4BpLGysnuD5z3o20XVPu41vTJh2RhB/mxhDWBsgEuNC8pB0iv4hc4f7GgZyS2GpyJgoftYpd5ihYZaTMukT017v1cGHsS16zhiwfzPHDIcA2NwfyWfKMfgvAIFlZRmzSTKUm6xddIPnn73mmZppkJUS8HVb5cK121jHyQOGI4KAv3z9wcEqXZ2Lde+SVpf7vYkMTMBSB7gCbVNGBg5JqCU+SQf3fUj6zVKJDYE3bzdishqUQk1+9EQfWZBQJlOvUGChzF0GBCerr91+49Op5uiCxWRT4fKDPWZN9CIwxtYxD7orE533n8Ydok74JxjNufc+L680QZCEkw3CAlgbqsPswdg7apHkutohhYJLOzYlakqIN17K0sB4xhnLwXU5wXRSYWz/lFotfa1xlvbHYo=
+  file: ''
+  skip_cleanup: true
+  on:
+    repo: haoyun/latex-ci-test
+    tags: true
 
